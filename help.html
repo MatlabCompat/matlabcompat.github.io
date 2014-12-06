@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="Plaque 2.0 - a  virological assay reloaded" />
+  <title>MatlabCompat.jl - MATLAB/Octave functions library for Julia</title>
+  <link rel="shortcut icon" href="favicon.ico">
+
+<script src="ga.js"></script>   
+</head>
+
+<body>
+
+<xmp theme="bootstrap" style="display:none;">
+![MatlabCompat.jl](img/LOGO.png "MatlabCompat.jl")
+
+### MATLAB/Octave functions library for Julia, fork us on on [GitHub](http://github.com/MatlabCompat/MatlabCompat.jl)
+
+###[__Home__](index.html) : [__Help__](help.html)
+
+## Installation and Getting started
+
+* In your Julia console invoke:
+```
+Pkg.add("MatlabCompat")
+```
+* Restart julia kernel if you are using IJulia.
+
+
+### Quick Functions Guide
+
+* _graythresh(img)_ - calculates a threshold of a grayscale image, which can be used downstream to convert a grayscale image to binary image. One
+ input argument is required - image (expected image format obtained by Images.imread, see [Images](https://github.com/timholy/Images.jl) package for more information). E.g. to convert an array to image use grayim(array) or colorim(array). Based on the original Paper: N. Otsu, "A Threshold Selection Method from Gray-Level Histograms" 1979.
+
+
+* _im2bw(img, threshold)_ - converts image into a binary image. Input: image (expected image format obtained by Images.imread, see [Images](https://github.com/timholy/Images.jl) package for more information) and threshold (floating point number). E.g. to convert an array to image use grayim(array) or colorim(array).
+
+to be continued...
+
+<br><br>
+
+
+
+####            Copyright © 2014 Artur Yakimovich
+<br>
+
+
+
+</xmp>
+
+<script src="v/0.2/strapdown.js"></script>
+</body>
+</html>
