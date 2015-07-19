@@ -25,22 +25,91 @@ Pkg.add("MatlabCompat")
 ```
 * Restart julia kernel if you are using IJulia.
 
+### Dependencies
+
+We use following Julia pacakages:
+
+Tk
+Images
+ImageView
+FixedPointNumbers
+MAT
+Color
+BinDeps
+
 
 ### Quick Functions Guide
 
-* _graythresh(img)_ - calculates a threshold of a grayscale image, which can be used downstream to convert a grayscale image to binary image. One
- input argument is required - image (expected image format obtained by Images.imread, see [Images](https://github.com/timholy/Images.jl) package for more information). E.g. to convert an array to image use grayim(array) or colorim(array). Based on the original Paper: N. Otsu, "A Threshold Selection Method from Gray-Level Histograms" 1979.
+#### ImageTools Module
+
+* _graythresh(image)_ - calculates a threshold of a grayscale image, which can be used downstream to convert a grayscale image to binary image. One input argument is required - image (expected image format obtained by Images.imread, see [Images](https://github.com/timholy/Images.jl) package for more information). E.g. to convert an array to image use grayim(array) or colorim(array). Based on the original Paper: N. Otsu, "A Threshold Selection Method from Gray-Level Histograms" 1979.
 
 
-* _im2bw(img, threshold)_ - converts image into a binary image. Input: image (expected image format obtained by Images.imread, see [Images](https://github.com/timholy/Images.jl) package for more information) and threshold (floating point number). E.g. to convert an array to image use grayim(array) or colorim(array).
+* _im2bw(image, threshold)_ - converts image into a binary image. Input: image (expected image format obtained by Images.imread, see [Images](https://github.com/timholy/Images.jl) package for more information) and threshold (floating point number). E.g. to convert an array to image use grayim(array) or colorim(array).
 
-to be continued...
+
+* _imshow(image)_ - a wrapper for the function _ImageView.view()_.
+
+
+* _imread(path)_ - a substitution function for Images.imread(), which supports reading an image from an URL (similar to Matlab/Octave).
+
+
+* _bwlabel(image,connectivity)_ - labels connected binary regions passed as the _image_ argument with the _connectivity_ defining [pixel connectivity](https://en.wikipedia.org/wiki/Pixel_connectivity) (e.g. 4 or 8).
+
+
+* _jet(numberOfColors::Int64)_ - generates Matlab/Octave-like jet colormap with specified amount of colors.
+
+
+* _hsv(numberOfColors::Int64)_ - generates Matlab/Octave-like hsv colormap with specified amount of colors.
+
+
+* _label2rgb(labeledMatrix, inputColorMap, backgroundColor, isShuffled)_ - creates an RGB image from a matrix of labeled connected regions (produced by the function _bwlabel()_) using following input parameters: matrix of labeled connected regions _labeledMatrix_, _colormap_ to be used _inputColorMap_ (e.g. _inputColorMap = "jet"_), background color in the RGB image produced _backgroundColor_ (e.g. _backgroundColor = [1 1 1]_), _isShuffled_ (e.g. _isShuffled = "noshuffle"_)
+
+
+#### Support Module
+
+* _mat2im(array)_ - an auxiliary function that converts a matrix (i.e. Julia array) to an image in the format of _Images_ package
+
+
+* _im2mat(image)_ - an auxiliary function that converts an image in the format of _Images_ package to a matrix (i.e. Julia array)
+
+
+* _rosetta(jlFilePath [, jlFilePath])_ - an auxiliary function for preliminary conversion of m-files to jl-files. _rosetta()_ takes the path to the m-file from the first input argument, replaces the Matlab/Octave comment symbols by Julia comment symbols and injects the _using MatlabCompat_ statement to facilitate functions namespace compatibility. If only one argument is provided the parsed code is returned by the function as a Dict. If second argument is provided _rosetta()_ will save the parsing results into provided path.
+
+
+#### Io (Input/Output) Module
+
+
+* _load(matFile, [treatAs, variable])_ - a Julia analogue of the Matlab/Octave function _load()_. First argument defines the path to the mat file. Second optional  argument defines whether the input will be treated as either _"-mat"_ or _"-ascii"_ file (e.g. _treatAs = "-mat"_). Returns Dict containing the mat-file contents. With the third optional input argument set to _variable = "all"_ returns all the variables. Provide specific variable to return only one variable. default values for the second and third argument are _treatAs = "-mat"_ and _variable = "all"_ respectively
+
+
+#### StringTools Module
+
+
+* _num2str(number)_ - covert number to a string in a Matlab/Octave style.
+
+
+* _disp(string)_ - wrapper for Julia _writeln()_ function for Matlab/Octave compatibility.
+
+
+* _strcat(stringsToAdd, ...)_ - wrapper for Julia _string()_ function for Matlab/Octave compatibility.
+
+
+#### MathTools Module
+
+
+* _numel(matrix)_ - wrapper for Julia _length()_ function for Matlab/Octave compatibility.
+
+
+* _max(vector)_ - wrapper for Julia _maximum()_ function for Matlab/Octave compatibility.
+
+
 
 <br><br>
 
 
 
-####            Copyright © 2014 Artur Yakimovich
+####            Copyright © 2014-2015 Vardan Andriasyan, Yauhen Yakimovich, Artur Yakimovich
 <br>
 
 
